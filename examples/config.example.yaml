@@ -1,0 +1,41 @@
+# Example settings. Copy to config.yaml (which is git-ignored) and fill in.
+# Secrets are NOT stored here. Only the NAMES of environment variables.
+
+mailbox:
+  provider: microsoft_graph          # or imap, gmail
+  tenant_id_env: TRIAGE_TENANT_ID
+  client_id_env: TRIAGE_CLIENT_ID
+  client_secret_env: TRIAGE_CLIENT_SECRET
+  mailbox_env: TRIAGE_MAILBOX        # the mailbox address, kept in an env var
+  scopes: [Mail.Read]                # add Mail.ReadWrite only at the filing stage
+
+crm:
+  kind: <hubspot | salesforce | sharepoint_list | podio | ams>
+  base_url_env: TRIAGE_CRM_URL
+  token_env: TRIAGE_CRM_TOKEN
+  search_order: [email, policy_number, client_name]
+  note_field: <NOTE FIELD OR ACTIVITY TYPE>
+
+run:
+  level: L0                          # L0 | L1 | L2 | L3
+  dry_run: true
+  max_threads_per_run: 50
+  state_dir: state
+  log_dir: logs
+
+folders:                             # only these may be used; never invent more
+  clients: <FOLDER: Clients>
+  carriers: <FOLDER: Carriers>
+  renewals: <FOLDER: Renewals>
+  newsletters: <FOLDER: Newsletters>
+  vendors: <FOLDER: Vendors>
+  receipts: <FOLDER: Receipts>
+
+protect:
+  keywords: [cancel, non-renewal, lapse, past due, audit, legal, claim deadline]
+  never_touch_senders: [<SENDER OR DOMAIN>]
+
+alerts:
+  channel_env: TRIAGE_ALERT_CHANNEL
+  quiet_hours: "21:00-07:00"
+  max_per_problem_per_day: 1

@@ -1,0 +1,9 @@
+.env
+*.key
+*token*
+*.pem
+state/
+logs/
+config.yaml
+__pycache__/
+*.pyc
